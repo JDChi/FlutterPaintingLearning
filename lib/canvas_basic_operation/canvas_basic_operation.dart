@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_painting_learning/background_grid_painter.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_draw_dr_rect_painter.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_rotate_painter.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_scale_grid_painter.dart';
@@ -50,6 +51,14 @@ class _CanvasBasicOperationState extends State<CanvasBasicOperation> {
       color: Colors.white,
       child: Stack(
         children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: CustomPaint(
+              painter: BackGroundGridPainter(),
+              foregroundPainter: getPainter(),
+            ),
+          ),
           Column(
             children: [
               TextButton(
@@ -81,13 +90,6 @@ class _CanvasBasicOperationState extends State<CanvasBasicOperation> {
                   },
                   child: Text(canvas_draw_dr_rect))
             ],
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: CustomPaint(
-              painter: getPainter(),
-            ),
           ),
         ],
       ),
