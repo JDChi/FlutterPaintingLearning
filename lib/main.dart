@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_basic_operation.dart';
-import 'package:flutter_painting_learning/path_basic_operation/path_basic_operation.dart';
 
 const String canvas_basic_operation = "canvas_basic_operation";
-const String path_basic_operation = "path_basic_operation";
 
 void main() {
   runApp(MyApp());
@@ -14,10 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      routes: {
-        canvas_basic_operation: (context) => CanvasBasicOperation(),
-        path_basic_operation: (context) => PathBasicOperation()
-      },
+      routes: {canvas_basic_operation: (context) => CanvasBasicOperation()},
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -51,11 +46,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.pushNamed(context, canvas_basic_operation);
                 },
                 child: Text("canvas_basic_operation")),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, path_basic_operation);
-                },
-                child: Text("path_basic_operation")),
           ],
         ),
       ),
