@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,10 +7,13 @@ import 'package:flutter_painting_learning/background_grid_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_linear_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_radial_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_sweep_painter.dart';
+import 'package:flutter_painting_learning/canvas_color_operation/shader_image_shader_painter.dart';
+import 'dart:ui' as ui;
 
 const String shader_gradient_linear = "shader_gradient_linear";
 const String shader_gradient_radial = "shader_gradient_radial";
 const String shader_gradient_sweep = "shader_gradient_sweep";
+const String shader_image_shader = "shader_image_shader";
 
 class ColorBasicOperation1 extends StatefulWidget {
   const ColorBasicOperation1({Key key}) : super(key: key);
@@ -20,6 +25,7 @@ class ColorBasicOperation1 extends StatefulWidget {
 class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
   Map<String, CustomPainter> painterMap = Map();
   String key = "";
+  ui.Image image;
 
   @override
   void initState() {
@@ -35,8 +41,23 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
         return ShaderGradientRadialPainter();
       case shader_gradient_sweep:
         return ShaderGradientSweepPainter();
+      case shader_image_shader:
+        return ShaderImageShaderPainter(image: image);
     }
     return null;
+  }
+
+  Future<ui.Image> loadImage(ImageProvider provider) {
+    Completer<ui.Image> completer = Completer<ui.Image>();
+    ImageStreamListener listener;
+    ImageStream stream = provider.resolve(ImageConfiguration());
+    listener = ImageStreamListener((info, syno) {
+      final ui.Image image = info.image; //监听图片流，获取图片
+      completer.complete(image);
+      stream.removeListener(listener);
+    });
+    stream.addListener(listener);
+    return completer.future;
   }
 
   @override
@@ -76,11 +97,24 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
                     });
                   },
                   child: Text(shader_gradient_sweep)),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      key = shader_image_shader;
+                      _loadImage();
+                    });
+                  },
+                  child: Text(shader_image_shader)),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void _loadImage() async {
+    image = await loadImage(AssetImage('images/test1.jpg'));
+    setState(() {});
   }
 
   @override

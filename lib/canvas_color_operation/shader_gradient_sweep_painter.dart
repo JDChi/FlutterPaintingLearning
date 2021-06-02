@@ -8,7 +8,7 @@ class ShaderGradientSweepPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     _moveCanvasToCenter(canvas, size);
-    _drawShaderRadial(canvas);
+    _drawShaderSweep(canvas);
   }
 
   @override
@@ -20,7 +20,7 @@ class ShaderGradientSweepPainter extends CustomPainter {
     canvas.translate(size.width / 2, size.height / 2);
   }
 
-  void _drawShaderRadial(Canvas canvas) {
+  void _drawShaderSweep(Canvas canvas) {
     var colors = [
       Color(0xFFF60C0C),
       Color(0xFFF3B913),
