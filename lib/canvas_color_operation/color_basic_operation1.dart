@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_painting_learning/background_grid_painter.dart';
+import 'package:flutter_painting_learning/canvas_color_operation/color_filter_matrix_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_filter_mode_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_linear_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_radial_painter.dart';
@@ -16,6 +17,7 @@ const String shader_gradient_radial = "shader_gradient_radial";
 const String shader_gradient_sweep = "shader_gradient_sweep";
 const String shader_image_shader = "shader_image_shader";
 const String color_filter_mode = "color_filter_mode";
+const String color_filter_matrix = "color_filter_matrix";
 
 class ColorBasicOperation1 extends StatefulWidget {
   const ColorBasicOperation1({Key key}) : super(key: key);
@@ -47,6 +49,8 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
         return ShaderImageShaderPainter(image: image);
       case color_filter_mode:
         return ColorFilterModePainter(image: image);
+      case color_filter_matrix:
+        return ColorFilterMatrixPainter(image: image);
     }
     return null;
   }
@@ -117,6 +121,14 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
                     });
                   },
                   child: Text(color_filter_mode)),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      key = color_filter_matrix;
+                      _loadImage();
+                    });
+                  },
+                  child: Text(color_filter_matrix)),
             ],
           ),
         ],
