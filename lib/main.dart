@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_basic_operation.dart';
+import 'package:flutter_painting_learning/canvas_color_operation/color_basic_operation1.dart';
 import 'package:flutter_painting_learning/path_basic_operation/path_basic_operation.dart';
 
 import 'canvas_color_operation/color_basic_operation.dart';
@@ -7,6 +8,7 @@ import 'canvas_color_operation/color_basic_operation.dart';
 const String canvas_basic_operation = "canvas_basic_operation";
 const String path_basic_operation = "path_basic_operation";
 const String color_basic_operation = "color_basic_operation";
+const String color_basic_operation1 = "color_basic_operation1";
 
 void main() {
   runApp(MyApp());
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
       routes: {
         canvas_basic_operation: (context) => CanvasBasicOperation(),
         path_basic_operation: (context) => PathBasicOperation(),
-        color_basic_operation: (context) => ColorBasicOperation()
+        color_basic_operation: (context) => ColorBasicOperation(),
+        color_basic_operation1: (context) => ColorBasicOperation1()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -65,6 +68,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.pushNamed(context, color_basic_operation);
                 },
                 child: Text(color_basic_operation)),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, color_basic_operation1);
+                },
+                child: Text(color_basic_operation1)),
           ],
         ),
       ),
