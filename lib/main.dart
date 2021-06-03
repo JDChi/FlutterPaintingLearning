@@ -4,6 +4,7 @@ import 'package:flutter_painting_learning/animation/pic_man_page2.dart';
 import 'package:flutter_painting_learning/canvas_basic_operation/canvas_basic_operation.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_basic_operation1.dart';
 import 'package:flutter_painting_learning/gesture/handle_page.dart';
+import 'package:flutter_painting_learning/gesture/ruler_page.dart';
 import 'package:flutter_painting_learning/path_basic_operation/path_basic_operation.dart';
 
 import 'canvas_color_operation/color_basic_operation.dart';
@@ -15,6 +16,7 @@ const String color_basic_operation1 = "color_basic_operation1";
 const String pic_main = "pic_main";
 const String pic_main2 = "pic_main2";
 const String handle = "handle";
+const String ruler = "ruler";
 
 void main() {
   runApp(MyApp());
@@ -32,7 +34,8 @@ class MyApp extends StatelessWidget {
         color_basic_operation1: (context) => ColorBasicOperation1(),
         pic_main: (context) => PicManPage(),
         pic_main2: (context) => PicManPage2(),
-        handle: (context) => HandlePage()
+        handle: (context) => HandlePage(),
+        ruler: (context) => RulerPage()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -97,6 +100,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.pushNamed(context, handle);
                 },
                 child: Text(handle)),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, ruler);
+                },
+                child: Text(ruler)),
           ],
         ),
       ),
