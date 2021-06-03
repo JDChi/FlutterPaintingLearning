@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_painting_learning/background_grid_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_filter_matrix_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_filter_mode_painter.dart';
+import 'package:flutter_painting_learning/canvas_color_operation/filter_quality_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/image_filter_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/mask_filter_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_linear_painter.dart';
@@ -22,6 +23,7 @@ const String color_filter_mode = "color_filter_mode";
 const String color_filter_matrix = "color_filter_matrix";
 const String mask_filter = "mask_filter";
 const String image_filter = "image_filter";
+const String filter_quality = "filter_quality";
 
 class ColorBasicOperation1 extends StatefulWidget {
   const ColorBasicOperation1({Key key}) : super(key: key);
@@ -59,6 +61,8 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
         return MaskFilterPainter(image: image);
       case image_filter:
         return ImageFilterPainter(image: image);
+      case filter_quality:
+        return FilterQualityPainter(image: image);
     }
     return null;
   }
@@ -154,6 +158,14 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
                       });
                     },
                     child: Text(image_filter)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = filter_quality;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(filter_quality)),
               ],
             ),
           ),
