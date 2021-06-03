@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_painting_learning/background_grid_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_filter_matrix_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/color_filter_mode_painter.dart';
+import 'package:flutter_painting_learning/canvas_color_operation/image_filter_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/mask_filter_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_linear_painter.dart';
 import 'package:flutter_painting_learning/canvas_color_operation/shader_gradient_radial_painter.dart';
@@ -20,6 +21,7 @@ const String shader_image_shader = "shader_image_shader";
 const String color_filter_mode = "color_filter_mode";
 const String color_filter_matrix = "color_filter_matrix";
 const String mask_filter = "mask_filter";
+const String image_filter = "image_filter";
 
 class ColorBasicOperation1 extends StatefulWidget {
   const ColorBasicOperation1({Key key}) : super(key: key);
@@ -55,6 +57,8 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
         return ColorFilterMatrixPainter(image: image);
       case mask_filter:
         return MaskFilterPainter(image: image);
+      case image_filter:
+        return ImageFilterPainter(image: image);
     }
     return null;
   }
@@ -86,62 +90,72 @@ class _ColorBasicOperation1State extends State<ColorBasicOperation1> {
               foregroundPainter: getPainter(),
             ),
           ),
-          Column(
-            children: [
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = shader_gradient_linear;
-                    });
-                  },
-                  child: Text(shader_gradient_linear)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = shader_gradient_radial;
-                    });
-                  },
-                  child: Text(shader_gradient_radial)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = shader_gradient_sweep;
-                    });
-                  },
-                  child: Text(shader_gradient_sweep)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = shader_image_shader;
-                      _loadImage();
-                    });
-                  },
-                  child: Text(shader_image_shader)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = color_filter_mode;
-                      _loadImage();
-                    });
-                  },
-                  child: Text(color_filter_mode)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = color_filter_matrix;
-                      _loadImage();
-                    });
-                  },
-                  child: Text(color_filter_matrix)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      key = mask_filter;
-                      _loadImage();
-                    });
-                  },
-                  child: Text(mask_filter)),
-            ],
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = shader_gradient_linear;
+                      });
+                    },
+                    child: Text(shader_gradient_linear)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = shader_gradient_radial;
+                      });
+                    },
+                    child: Text(shader_gradient_radial)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = shader_gradient_sweep;
+                      });
+                    },
+                    child: Text(shader_gradient_sweep)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = shader_image_shader;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(shader_image_shader)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = color_filter_mode;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(color_filter_mode)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = color_filter_matrix;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(color_filter_matrix)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = mask_filter;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(mask_filter)),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        key = image_filter;
+                        _loadImage();
+                      });
+                    },
+                    child: Text(image_filter)),
+              ],
+            ),
           ),
         ],
       ),

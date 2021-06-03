@@ -1,22 +1,23 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MaskFilterPainter extends CustomPainter {
+class ImageFilterPainter extends CustomPainter {
   final ui.Image image;
 
   double get imgW => image.width.toDouble();
 
   double get imgH => image.height.toDouble();
 
-  MaskFilterPainter({this.image});
+  ImageFilterPainter({this.image});
 
   @override
   void paint(Canvas canvas, Size size) {
     if (image == null) return;
     canvas.translate(100, size.height / 2);
-    _drawMaskFilter(canvas);
+    _drawImageFilter(canvas);
   }
 
   @override
@@ -24,19 +25,17 @@ class MaskFilterPainter extends CustomPainter {
     return false;
   }
 
-  void _drawMaskFilter(Canvas canvas) {
+  void _drawImageFilter(Canvas canvas) {
     // 滤色
     Paint paint = Paint();
     _drawImage(canvas, paint);
-    paint.maskFilter = MaskFilter.blur(BlurStyle.inner, 20);
+    paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.4, sigmaY: 0.4);
     _drawImage(canvas, paint);
-    paint.maskFilter = MaskFilter.blur(BlurStyle.outer, 3);
+    paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.6, sigmaY: 0.6);
     _drawImage(canvas, paint);
-    paint.maskFilter = MaskFilter.blur(BlurStyle.solid, 3);
+    paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.8, sigmaY: 0.8);
     _drawImage(canvas, paint);
-    paint.maskFilter = MaskFilter.blur(BlurStyle.normal, 3);
-    _drawImage(canvas, paint);
-    paint.maskFilter = MaskFilter.blur(BlurStyle.normal, 5);
+    paint.imageFilter = ui.ImageFilter.matrix(Matrix4.skew(pi / 8, 0).storage);
     _drawImage(canvas, paint);
   }
 
