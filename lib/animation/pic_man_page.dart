@@ -15,8 +15,6 @@ class _PicManPageState extends State<PicManPage> with TickerProviderStateMixin {
   @override
   void initState() {
     _controller = AnimationController(
-      lowerBound: 10,
-      upperBound: 40,
       duration: const Duration(seconds: 1),
       vsync: this,
     )..repeat(reverse: true);
@@ -28,7 +26,7 @@ class _PicManPageState extends State<PicManPage> with TickerProviderStateMixin {
     return Scaffold(
         body: Center(
       child: CustomPaint(
-        painter: PicManPainter(color: Colors.blue, angle: _controller),
+        painter: PicManPainter(repaint: _controller),
         size: Size(100, 100),
       ),
     ));

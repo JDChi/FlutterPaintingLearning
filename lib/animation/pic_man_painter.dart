@@ -2,14 +2,17 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_painting_learning/animation/color_double_tween.dart';
 
 class PicManPainter extends CustomPainter {
-  final Color color;
-  final Animation<double> angle;
+  final Animation<double> repaint;
   Paint _paint = Paint();
 
-  PicManPainter({this.color = Colors.yellowAccent, this.angle})
-      : super(repaint: angle);
+  final ColorDoubleTween tween = ColorDoubleTween(
+      begin: ColorDouble(color: Colors.blue, value: 10),
+      end: ColorDouble(color: Colors.red, value: 40));
+
+  PicManPainter({this.repaint}) : super(repaint: repaint);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -24,14 +27,15 @@ class PicManPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant PicManPainter oldDelegate) {
-    return oldDelegate.color != color;
+    return oldDelegate.repaint != repaint;
   }
 
   void _drawHead(Canvas canvas, Size size) {
     var rect = Rect.fromCenter(
         center: Offset.zero, width: size.width, height: size.height);
-    var a = angle.value / 180 * pi;
-    canvas.drawArc(rect, a, 2 * pi - a.abs() * 2, true, _paint..color = color);
+    var a = tween.evaluate(repaint).value / 180 * pi;
+    canvas.drawArc(rect, a, 2 * pi - a.abs() * 2, true,
+        _paint..color = tween.evaluate(repaint).color);
   }
 
   void _drawEye(Canvas canvas, double radius) {
