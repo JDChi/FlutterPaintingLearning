@@ -29,12 +29,14 @@ class ImageFilterPainter extends CustomPainter {
     // 滤色
     Paint paint = Paint();
     _drawImage(canvas, paint);
+    // 使图片变模糊
     paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.4, sigmaY: 0.4);
     _drawImage(canvas, paint);
     paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.6, sigmaY: 0.6);
     _drawImage(canvas, paint);
     paint.imageFilter = ui.ImageFilter.blur(sigmaX: 0.8, sigmaY: 0.8);
     _drawImage(canvas, paint);
+    // 使图片进行矩阵变换
     paint.imageFilter = ui.ImageFilter.matrix(Matrix4.skew(pi / 8, 0).storage);
     _drawImage(canvas, paint);
   }
