@@ -6,6 +6,7 @@ import 'package:flutter_painting_learning/canvas_color_operation/color_basic_ope
 import 'package:flutter_painting_learning/gesture/handle_page.dart';
 import 'package:flutter_painting_learning/gesture/ruler_page.dart';
 import 'package:flutter_painting_learning/path_basic_operation/path_basic_operation.dart';
+import 'package:flutter_painting_learning/path_bezier/path_bezier.dart';
 import 'package:flutter_painting_learning/path_curve_line/path_curve_line.dart';
 
 import 'canvas_color_operation/color_basic_operation.dart';
@@ -19,6 +20,7 @@ const String pic_main2 = "pic_main2";
 const String handle = "handle";
 const String ruler = "ruler";
 const String path_curve_line = "path_curve_line";
+const String path_bezier = "path_bezier";
 
 void main() {
   runApp(MyApp());
@@ -38,7 +40,8 @@ class MyApp extends StatelessWidget {
         pic_main2: (context) => PicManPage2(),
         handle: (context) => HandlePage(),
         ruler: (context) => RulerPage(),
-        path_curve_line: (context) => PathCurveLine()
+        path_curve_line: (context) => PathCurveLine(),
+        path_bezier: (context) => PathBezier()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -114,6 +117,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Navigator.pushNamed(context, path_curve_line);
                   },
                   child: Text(path_curve_line)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, path_bezier);
+                  },
+                  child: Text(path_bezier)),
             ],
           ),
         ),
