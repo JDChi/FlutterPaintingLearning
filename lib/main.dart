@@ -6,6 +6,7 @@ import 'package:flutter_painting_learning/canvas_color_operation/color_basic_ope
 import 'package:flutter_painting_learning/gesture/handle_page.dart';
 import 'package:flutter_painting_learning/gesture/ruler_page.dart';
 import 'package:flutter_painting_learning/path_basic_operation/path_basic_operation.dart';
+import 'package:flutter_painting_learning/path_curve_line/path_curve_line.dart';
 
 import 'canvas_color_operation/color_basic_operation.dart';
 
@@ -17,6 +18,7 @@ const String pic_main = "pic_main";
 const String pic_main2 = "pic_main2";
 const String handle = "handle";
 const String ruler = "ruler";
+const String path_curve_line = "path_curve_line";
 
 void main() {
   runApp(MyApp());
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
         pic_main: (context) => PicManPage(),
         pic_main2: (context) => PicManPage2(),
         handle: (context) => HandlePage(),
-        ruler: (context) => RulerPage()
+        ruler: (context) => RulerPage(),
+        path_curve_line: (context) => PathCurveLine()
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -62,50 +65,57 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, canvas_basic_operation);
-                },
-                child: Text(canvas_basic_operation)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, path_basic_operation);
-                },
-                child: Text(path_basic_operation)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, color_basic_operation);
-                },
-                child: Text(color_basic_operation)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, color_basic_operation1);
-                },
-                child: Text(color_basic_operation1)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, pic_main);
-                },
-                child: Text(pic_main)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, pic_main2);
-                },
-                child: Text(pic_main2)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, handle);
-                },
-                child: Text(handle)),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, ruler);
-                },
-                child: Text(ruler)),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, canvas_basic_operation);
+                  },
+                  child: Text(canvas_basic_operation)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, path_basic_operation);
+                  },
+                  child: Text(path_basic_operation)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, color_basic_operation);
+                  },
+                  child: Text(color_basic_operation)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, color_basic_operation1);
+                  },
+                  child: Text(color_basic_operation1)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, pic_main);
+                  },
+                  child: Text(pic_main)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, pic_main2);
+                  },
+                  child: Text(pic_main2)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, handle);
+                  },
+                  child: Text(handle)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, ruler);
+                  },
+                  child: Text(ruler)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, path_curve_line);
+                  },
+                  child: Text(path_curve_line)),
+            ],
+          ),
         ),
       ),
     );
