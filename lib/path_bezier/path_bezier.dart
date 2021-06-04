@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_painting_learning/background_grid_painter.dart';
+import 'package:flutter_painting_learning/path_bezier/bezier3_painter.dart';
 import 'package:flutter_painting_learning/path_bezier/simple_bezier2_painter.dart';
 import 'package:flutter_painting_learning/path_bezier/touch_info.dart';
 
 const String simple_bezier2 = "simple_bezier2";
+const String simple_bezier3 = "simple_bezier3";
 
 class PathBezier extends StatefulWidget {
   const PathBezier({Key key}) : super(key: key);
@@ -22,17 +24,18 @@ class _PathBezierState extends State<PathBezier> with TickerProviderStateMixin {
   @override
   void initState() {
     SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-    _controller = AnimationController(
-      duration: const Duration(seconds: 15),
-      vsync: this,
-    );
+    _controller =
+        AnimationController(duration: const Duration(seconds: 15), vsync: this);
     super.initState();
   }
 
   CustomPainter getPainter() {
+    touchInfo.clear();
     switch (key) {
       case simple_bezier2:
         return SimpleBezier2Painter(repaint: touchInfo);
+      case simple_bezier3:
+        return SimpleBezier3Painter(repaint: touchInfo);
     }
     return null;
   }
@@ -67,6 +70,13 @@ class _PathBezierState extends State<PathBezier> with TickerProviderStateMixin {
                           });
                         },
                         child: Text(simple_bezier2)),
+                    TextButton(
+                        onPressed: () {
+                          setState(() {
+                            key = simple_bezier3;
+                          });
+                        },
+                        child: Text(simple_bezier3)),
                   ],
                 ),
               ],
@@ -86,11 +96,20 @@ class _PathBezierState extends State<PathBezier> with TickerProviderStateMixin {
   }
 
   void _onPanDown(DragDownDetails details) {
-    if (touchInfo.points.length < 3) {
-      touchInfo.addPoint(details.localPosition);
-    } else {
-      judgeZone(details.localPosition);
+    if(key == simple_bezier2){
+      if (touchInfo.points.length < 3) {
+        touchInfo.addPoint(details.localPosition);
+      } else {
+        judgeZone(details.localPosition);
+      }
+    }else if(key == simple_bezier3){
+      if (touchInfo.points.length < 4) {
+        touchInfo.addPoint(details.localPosition);
+      } else {
+        judgeZone(details.localPosition);
+      }
     }
+
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
